@@ -7,7 +7,8 @@ My personal website will be an REST API specification with its own in-page clien
 
 ### Why would anyone ever want to do that?
 // TODO: I'm wasting too much time trying to word this
-/* Anyway, I want to take this project as an opportunity to learn a lot of stuff I don't focus on in my day job like node.js, AWS, and much more. */
+
+/ * Anyway, I want to take this project as an opportunity to learn a lot of stuff I don't focus on in my day job like node.js, AWS, and much more. * /
 
 ### Goals
 * Design a basic REST API spec page 
