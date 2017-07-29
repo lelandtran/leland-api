@@ -14,6 +14,7 @@ My personal website will be an REST API specification with its own in-page clien
 * Design a basic REST API spec page 
 * Include an in-page web client
 * Use the MERN stack to implement the application
+* Track progress on Github
 
 ### Stretch Goals
 * Deploy the application to AWS
