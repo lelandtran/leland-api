@@ -2,6 +2,12 @@
 
 The leland-api project is a cheeky idea I thought of when trying to come up with a personal website
 
+### 10/07 Update
+I would like to try to use the Play Framework in order to try to learn Scala and working with a non-blocking I/O framework.
+
+Baby Steps:
+1. Create a Hello World application which pulls my Github info.
+
 ### The Idea
 My personal website will be an REST API specification with its own in-page client for calling a web service which will serve information about me which I choose to expose
 
