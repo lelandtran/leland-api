@@ -2,12 +2,11 @@ package controllers
 
 import javax.inject._
 
-import play.api.libs.json.{JsObject, JsString, JsTrue, JsValue}
-import play.api.libs.ws.{WSClient, WSResponse}
+import play.api.libs.json.{JsObject, JsString, JsValue}
+import play.api.libs.ws.WSClient
 import play.api.mvc._
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
 
 
 @Singleton
