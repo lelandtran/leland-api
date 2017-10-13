@@ -15,6 +15,8 @@ GET     /test/proxy                 controllers.TestController.asyncProxy
 
 GET     /test/dummy                 controllers.TestController.dummy
 
+GET     /auth/github                controllers.AuthController.authGithub
+
 GET     /auth/github/callback       controllers.AuthController.authGithubCb(code: String)
 
 # Map static resources from the /public folder to the /assets URL path

@@ -11,19 +11,25 @@ import scala.concurrent.ExecutionContext.Implicits.global
 @Singleton
 class AuthController @Inject() (cc: ControllerComponents, configuration: play.api.Configuration, ws: WSClient) extends AbstractController(cc){
 
-  val clientId = configuration.underlying.getString("auth.github.client_id")
-  val clientSecret = configuration.underlying.getString("auth.github.client_secret")
+  val CLIENT_ID = configuration.underlying.getString("auth.github.client_id")
+  val CLIENT_SECRET = configuration.underlying.getString("auth.github.client_secret")
+  val URL_GITHUB_ACCESS = "https://github.com/login/oauth/access_token"
+  val URL_GITHUB_AUTH = "https://github.com/login/oauth/authorize"
+
+  def authGithub = Action {
+    Redirect(URL_GITHUB_AUTH, Map("client_id"->Seq(CLIENT_ID)), FOUND)
+  }
 
   def authGithubCb(code: String) = Action.async { request =>
-    ws.url("https://github.com/login/oauth/access_token").post(Json.obj(
+    ws.url(URL_GITHUB_ACCESS).post(Json.obj(
       "code" -> code,
-      "client_id" -> clientId,
-      "client_secret" -> clientSecret))
+      "client_id" -> CLIENT_ID,
+      "client_secret" -> CLIENT_SECRET))
       .map { response =>
         val body = response.body
         val headers = response.headers
         val status = response.status
-        Ok("Client Id: "+clientId+".\n" +
+        Ok("Client Id: "+CLIENT_ID+".\n" +
           "Sent request with code " + code + ".\n" +
           "Got response " + status + ".\n" +
           "Headers: \n" + headers.foldLeft(new StringBuilder(""))((sb, header) =>
