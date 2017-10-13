@@ -29,12 +29,15 @@ class AuthController @Inject() (cc: ControllerComponents, configuration: play.ap
         val body = response.body
         val headers = response.headers
         val status = response.status
+
+        val formatHeaders: (StringBuilder, (String, Seq[String]))=> StringBuilder = ((sb, header) =>
+          sb.append("\t(").append(header._1).append(")->(").append(header._2).append(")\n"))
+
         Ok("Client Id: "+CLIENT_ID+".\n" +
           "Sent request with code " + code + ".\n" +
           "Got response " + status + ".\n" +
-          "Headers: \n" + headers.foldLeft(new StringBuilder(""))((sb, header) =>
-            sb.append("\t(").append(header._1).append(")->(").append(header._2).append(")\n")
-          ).toString() + ".\n"+
+          "Headers: \n" +
+          headers.foldLeft(new StringBuilder(""))(formatHeaders).toString() + ".\n"+
           "Body: " + body + ".\n")
     }
   }
