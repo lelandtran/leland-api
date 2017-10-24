@@ -22,6 +22,8 @@ class AuthController @Inject() (cc: ControllerComponents, configuration: play.ap
   val URL_LINKEDIN_REDIRECT = "http://localhost:9000/auth/linkedin/callback"
   val URL_GITHUB_ACCESS = "https://github.com/login/oauth/access_token"
   val URL_GITHUB_AUTH = "https://github.com/login/oauth/authorize"
+  var accessTokenLinkedIn: String = "";
+  var accessTokenGitHub = "";
 
   def authLinkedIn = Action {
     val headers = Map(
@@ -44,6 +46,9 @@ class AuthController @Inject() (cc: ControllerComponents, configuration: play.ap
         "client_secret"->CLIENT_SECRET_LINKEDIN
       ))
       .map { response =>
+        val respJsValue = Json.parse(response.body)
+        accessTokenLinkedIn = (respJsValue \ "access_token").as[String]
+        System.out.println("accessTokenLinkedIn: " + accessTokenLinkedIn)
         Ok("Received response: " +
           formatResponse(response)
         )
