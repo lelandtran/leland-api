@@ -9,6 +9,10 @@ GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
+#->      /v1/posts                   v1.post.PostRouter
+
+GET      /v1/posts                   v1.post.PostRouter.getAll
+
 GET     /test                       controllers.TestController.index
 
 GET     /test/proxy                 controllers.TestController.asyncProxy
@@ -24,6 +28,7 @@ GET     /auth/linkedin              controllers.AuthController.authLinkedIn
 GET     /auth/linkedin/callback     controllers.AuthController.authLinkedInCb(code: String, state: String)
 
 GET     /linkedin                   controllers.InfoController.linkedin
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

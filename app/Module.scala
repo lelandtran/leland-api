@@ -1,9 +1,11 @@
 import com.google.inject.AbstractModule
 import java.time.Clock
+import javax.inject._
 
-import play.api.libs.ws.ahc.StandaloneAhcWSClient
-import play.shaded.ahc.org.asynchttpclient.AsyncHttpClient
+import net.codingwell.scalaguice.ScalaModule
+import play.api.{Configuration, Environment}
 import services.{ApplicationTimer, AtomicCounter, Counter}
+import v1.post.{PostRepository, PostRepositoryImpl}
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -15,7 +17,9 @@ import services.{ApplicationTimer, AtomicCounter, Counter}
  * adding `play.modules.enabled` settings to the `application.conf`
  * configuration file.
  */
-class Module extends AbstractModule {
+class Module(environment: Environment, configuration: Configuration)
+  extends AbstractModule
+  with ScalaModule {
 
   override def configure() = {
     // Use the system clock as the default implementation of Clock
@@ -25,6 +29,8 @@ class Module extends AbstractModule {
     bind(classOf[ApplicationTimer]).asEagerSingleton()
     // Set AtomicCounter as the implementation for Counter.
     bind(classOf[Counter]).to(classOf[AtomicCounter])
+
+    bind[PostRepository].to[PostRepositoryImpl].in[Singleton]
   }
 
 }
