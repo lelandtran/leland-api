@@ -29,6 +29,14 @@ class PostResourceHandler @Inject()(routerProvider: Provider[PostRouter],
     }
   }
 
+  def lookup(id: String)(implicit mc: MarkerContext): Future[Option[PostResource]] = {
+    postRepository.get(PostId(id)).map { maybePostData =>
+      maybePostData.map { postData =>
+        createPostResource(postData)
+      }
+    }
+  }
+
   def create(postInput: PostFormInput)(implicit mc: MarkerContext): Future[PostResource] = {
     val data = PostData(PostId("999"), postInput.title, postInput.body)
     postRepository.create(data).map { id =>
@@ -36,7 +44,7 @@ class PostResourceHandler @Inject()(routerProvider: Provider[PostRouter],
     }
   }
 
-  private def createPostResource(p: PostData): PostResource ={
+  private def createPostResource(p: PostData): PostResource = {
     PostResource(p.id.toString, routerProvider.get.link(p.id), p.title, p.body)
   }
 }

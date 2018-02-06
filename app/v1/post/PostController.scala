@@ -33,10 +33,16 @@ class PostController @Inject()(cc: PostControllerComponents)(implicit ec: Execut
     }
   }
 
-
   def process: Action[AnyContent] = PostAction.async { implicit request =>
     logger.trace("process: ")
     processJsonPost()
+  }
+
+  def show(id: String): Action[AnyContent] = PostAction.async { implicit request =>
+    logger.trace(s"show: id = $id")
+    postResourceHandler.lookup(id).map { post =>
+      Ok(Json.toJson(post))
+    }
   }
 
   private def processJsonPost[A]()(implicit request: PostRequest[A]): Future[Result] = {

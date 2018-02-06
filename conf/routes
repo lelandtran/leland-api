@@ -13,6 +13,8 @@ GET     /message                    controllers.AsyncController.message
 
 GET      /v1/posts                   v1.post.PostRouter.getAll
 
+GET     /v1/posts/:id               v1.post.PostRouter.get(id: String)
+
 POST    /v1/posts                   v1.post.PostRouter.create
 
 GET     /test                       controllers.TestController.index

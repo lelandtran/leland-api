@@ -34,4 +34,8 @@ class PostRouter @Inject()(controller: PostController) extends SimpleRouter{
   def create = {
     controller.process
   }
+
+  def get(id: String) = {
+    controller.show(id)
+  }
 }
