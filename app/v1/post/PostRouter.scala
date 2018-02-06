@@ -30,4 +30,8 @@ class PostRouter @Inject()(controller: PostController) extends SimpleRouter{
   def getAll = {
     controller.index
   }
+
+  def create = {
+    controller.process
+  }
 }

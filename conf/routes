@@ -13,6 +13,8 @@ GET     /message                    controllers.AsyncController.message
 
 GET      /v1/posts                   v1.post.PostRouter.getAll
 
+POST    /v1/posts                   v1.post.PostRouter.create
+
 GET     /test                       controllers.TestController.index
 
 GET     /test/proxy                 controllers.TestController.asyncProxy
