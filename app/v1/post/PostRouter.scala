@@ -20,11 +20,10 @@ class PostRouter @Inject()(controller: PostController) extends SimpleRouter{
       controller.index
 
     case POST(p"/") =>
-//      controller.index
       controller.process
 
     case GET(p"/$id") =>
-      controller.index
+      controller.show(id)
   }
 
   def getAll = {

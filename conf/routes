@@ -9,6 +9,8 @@ GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code
 GET     /message                    controllers.AsyncController.message
 
+GET     /routingNum/:routingNumber   v1.routingnums.RoutingNumbersRouter.get(routingNumber: String)
+
 #->      /v1/posts                   v1.post.PostRouter
 
 GET      /v1/posts                   v1.post.PostRouter.getAll
