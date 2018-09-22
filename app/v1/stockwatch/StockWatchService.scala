@@ -20,7 +20,7 @@ class StockWatchService @Inject()(ws: WSClient, configuration: Configuration){
     ws.url(queryUrl)
       .addQueryStringParameters(("function", "GLOBAL_QUOTE"))
       .addQueryStringParameters(("symbol", symbol))
-      .addQueryStringParameters(("apiKey", apiKey))
+      .addQueryStringParameters(("apikey", apiKey))
       .get()
   }
 }

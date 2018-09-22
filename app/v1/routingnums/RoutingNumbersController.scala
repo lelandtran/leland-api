@@ -1,16 +1,11 @@
 package v1.routingnums
 
-import java.util.concurrent.Future
-
-import scala.concurrent.duration._
-import akka.actor.ActorSystem
 import com.redis.RedisClient
 import javax.inject.Inject
 import play.api.libs.ws.WSClient
-import play.api.mvc.{Action, BaseController, ControllerComponents, DefaultControllerComponents}
+import play.api.mvc.{BaseController, ControllerComponents, DefaultControllerComponents}
 
-import scala.concurrent.{ExecutionContext, Promise}
-import scala.concurrent.duration.FiniteDuration
+import scala.concurrent.ExecutionContext
 
 class RoutingNumbersController @Inject()(cc: DefaultControllerComponents, ws: WSClient)(implicit ec: ExecutionContext) extends BaseController {
   override protected def controllerComponents: ControllerComponents = cc
