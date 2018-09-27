@@ -11,6 +11,6 @@ class StockWatchController @Inject()(stockWatchService: StockWatchService, cc: D
 
   def show(symbol: String) = Action.async { implicit request =>
     stockWatchService.quote(symbol)
-      .map(res => Ok(Json.toJson(res.body)))
+      .map(res => Ok(Json.toJson(res.symbol -> res.price)))
   }
 }
