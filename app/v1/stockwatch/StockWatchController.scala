@@ -13,4 +13,14 @@ class StockWatchController @Inject()(stockWatchService: StockWatchService, cc: D
     stockWatchService.quote(symbol)
       .map(res => Ok(Json.toJson(res.symbol -> res.price)))
   }
+
+  def add(symbol: String) = Action.async { implicit request =>
+    stockWatchService.add(symbol)
+      .map(res => Ok(Json.toJson(res)))
+  }
+
+  def list() = Action.async { implicit request =>
+    stockWatchService.list()
+      .map(res => Ok(Json.toJson(res)))
+  }
 }

@@ -15,4 +15,12 @@ class StockWatchRouter @Inject()(controller : StockWatchController) extends Simp
   def get(symbol: String) = {
     controller.show(symbol)
   }
+
+  def add(symbol: String) = {
+    controller.add(symbol)
+  }
+
+  def list() = {
+    controller.list()
+  }
 }

@@ -11,6 +11,10 @@ GET     /message                    controllers.AsyncController.message
 
 GET     /stockwatch/:symbol         v1.stockwatch.StockWatchRouter.get(symbol: String)
 
+GET     /stockwatch/:symbol/add     v1.stockwatch.StockWatchRouter.add(symbol: String)
+
+GET     /stockwatch                 v1.stockwatch.StockWatchRouter.list()
+
 GET     /routingNum/:routingNumber   v1.routingnums.RoutingNumbersRouter.get(routingNumber: String)
 
 #->      /v1/posts                   v1.post.PostRouter
