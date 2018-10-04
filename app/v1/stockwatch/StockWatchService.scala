@@ -14,6 +14,7 @@ class StockWatchService @Inject()(ws: WSClient, configuration: Configuration)(im
   val apiKey = configuration.underlying.getString("auth.alpha_vantage.api_key")
 //  val redisClients = new RedisClientPool("localhost", 6379)
   val redisClient = new RedisClient("localhost", 6379)
+  val TTL = 10;
 
   def quote(symbol: String) = {
     // query redis
@@ -31,7 +32,9 @@ class StockWatchService @Inject()(ws: WSClient, configuration: Configuration)(im
         .get()
         .map(resp => {
           val price = (resp.json \ "Global Quote" \ "05. price").as[String];
-          redisClient.set("stocks:"+symbol+":price", price)
+          val priceKey = "stocks:"+symbol+":price";
+          redisClient.set(priceKey, price)
+          redisClient.expire(priceKey, TTL)
           new Stock(symbol, price)
         })
     }
